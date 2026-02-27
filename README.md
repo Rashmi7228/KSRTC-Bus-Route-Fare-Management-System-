@@ -4,7 +4,7 @@ Overview
 A console-based Java application that simulates ticket booking and fare calculation for KSRTC buses operating between major stops from Bidadi to Mysore.
 The system allows the driver to enter depot and bus details, choose routes, generate tickets with distance and fare, and track total earnings.
 ________________________________________
-Features
+Features 
 •	Route selection using short codes (B, R, C, MU, MN, S, MY)
 •	Automatic distance and fare display
 •	Ticket generation with date and time
