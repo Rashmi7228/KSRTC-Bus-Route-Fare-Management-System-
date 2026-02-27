@@ -1,0 +1,353 @@
+
+import java.time.LocalDateTime;
+import java.util.Scanner;
+
+public class KSRTC
+{
+    static String start, end,Bus_no , driver_id;
+    static int depo;
+    static int totalEarned = 0;
+    public static void main(String[] args)
+    {
+        // printMenu();
+    }
+
+    static
+    {
+        Scanner key = new Scanner(System.in);
+        System.out.println("Enter bus number : ");
+        Bus_no = key.next();
+        System.out.println("Enter depo number: ");
+        depo = key.nextInt();
+        System.out.println("Enter driver id no: ");
+        driver_id = key.next();
+        gender();
+    }
+    public static void gender()
+    {
+        Scanner key = new Scanner(System.in);
+        System.out.println("Enter gender female (F) or male (M)");
+        char gen = key.next().charAt(0);
+        char gender = Character.toLowerCase(gen);
+        if(gender == 'f')
+        {
+            printMenu();
+            printDetail(0,0);
+        }
+        else if(gender == 'm')
+        {
+            printMenu();
+            place();
+        }
+        else
+        {
+            System.out.println("Invalid choice try again");
+            gender();
+        }
+    }
+
+    public static void printMenu()
+    {
+        System.out.println("\tFor Bidadi press B");
+        System.out.println("\tFor Ramanagara press R");
+        System.out.println("\tFor Channapatna press C");
+        System.out.println("\tFor Madhur press MU");
+        System.out.println("\tFor Mandya press MN");
+        System.out.println("\tFor Srirangapatna press S");
+        System.out.println("\tFor Mysore press MY");
+
+        Scanner key = new Scanner(System.in);
+        System.out.println("Enter your starting place");
+        start = key.next().toLowerCase();
+
+        System.out.println("Enter your ending place");
+        end = key.next().toLowerCase();
+        //place();
+
+    }
+
+    public static void place()
+    {
+        switch (start)
+        {
+            case "b":
+                bidadiDestination(end);
+                break;
+
+            case "r":
+                ramanagaraDestination(end);
+                break;
+
+            case "c":
+                channapatnaDestination(end);
+                break;
+
+            case "mu":
+                madhurDestination(end);
+                break;
+
+            case "mn":
+                mandyaDestination(end);
+                break;
+
+            case "s":
+                srirangapatnaDestination(end);
+                break;
+
+            case "my":
+                System.out.println("It's your last destination");
+                break;
+
+            default:
+                System.out.println("Invalid starting place");
+        }
+
+        ContinueOrNot();
+    }
+
+    public static void bidadiDestination(String end)
+    {
+        switch (end)
+        {
+            case "r":
+                printDetail(15, 17);
+                break;
+
+            case "c":
+                printDetail(26, 32);
+                break;
+
+            case "mu":
+                printDetail(47, 54);
+                break;
+
+            case "mn":
+                printDetail(66, 75);
+                break;
+
+            case "s":
+                printDetail(93, 100);
+                break;
+
+            case "my":
+                printDetail(111, 120);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void ramanagaraDestination(String end)
+    {
+        switch (end)
+        {
+            case "c":
+                printDetail(11, 1);
+                break;
+
+            case "mu":
+                printDetail(32, 22);
+                break;
+
+            case "mn":
+                printDetail(51, 58);
+                break;
+
+            case "s":
+                printDetail(78, 83);
+                break;
+
+            case "my":
+                printDetail(96, 103);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void channapatnaDestination(String end)
+    {
+        switch (end)
+        {
+            case "mu":
+                printDetail(21, 22);
+                break;
+
+            case "mn":
+                printDetail(40, 43);
+                break;
+
+            case "s":
+                printDetail(67, 68);
+                break;
+
+            case "my":
+                printDetail(85, 88);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void madhurDestination(String end)
+    {
+        switch (end)
+        {
+            case "mn":
+                printDetail(19, 21);
+                break;
+
+            case "s":
+                printDetail(46, 46);
+                break;
+
+            case "my":
+                printDetail(64, 66);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void mandyaDestination(String end)
+    {
+        switch (end)
+        {
+            case "s":
+                printDetail(27, 25);
+                break;
+
+            case "my":
+                printDetail(45, 45);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void srirangapatnaDestination(String end)
+    {
+        switch (end)
+        {
+            case "my":
+                printDetail(18, 10);
+                break;
+
+            default:
+                System.out.println("Invalid destination from " + start);
+        }
+    }
+
+    public static void printDetail(int distance, int fare)
+    {
+        Scanner key = new Scanner(System.in);
+        LocalDateTime hi = LocalDateTime.now();
+        System.out.println("|__________**** K.S.R.T.C ****__________");
+        System.out.println("|Depo :"+depo+"                 TIME:"+hi.toLocalTime().withNano(0));
+        System.out.println("|"+Bus_no+"               Date:"+hi.toLocalDate());
+        System.out.println("|          START : " + getFullStartName(start));
+        System.out.println("|                  to ");
+        System.out.println("|          END : " + getFullEndName(end));
+
+        System.out.println("| Distance: " + distance + " km");
+        System.out.println("| Fare: ₹" + fare);
+        totalEarned += fare;
+        System.out.println("|________________________________________");
+
+
+        System.out.println("If u have entered to DEPO then :");
+        System.out.println("enter 'y' for yes \nenter 'n' for no");
+        char choose = key.next().charAt(0);
+        char choice = Character.toLowerCase(choose);
+        if( choice == 'y')
+        {
+            System.out.println("\t::::::::::::::::::::::::::::");
+            System.out.println("\t| Date : "+hi.toLocalDate() +"        |");
+            System.out.println("\t| Time  : "+hi.toLocalTime().withNano(0)+"         |");
+            System.out.println("\t| Depo no : "+depo+"             |");
+            System.out.println("\t| Bus No : "+Bus_no+"       |");
+            System.out.println("\t| Driver id no : "+driver_id+"      |");
+            System.out.println("\t| Total Earned so far: ₹ " + totalEarned+"|");
+            System.out.println("\t::::::::::::::::::::::::::::");
+            ContinueOrNot();
+        }
+        else if(choice == 'n')
+        {
+            ContinueOrNot();
+        }
+    }
+
+
+    public static String getFullStartName(String start)
+    {
+        switch (start)
+        {
+            case "b":
+                return "Bidadi";
+            case "r":
+                return "Ramanagara";
+            case "c":
+                return "Channapatna";
+            case "mu":
+                return "Madhur";
+            case "mn":
+                return "Mandya";
+            case "s":
+                return "Srirangapatna";
+            case "my":
+                return "Mysore";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public static String getFullEndName(String end)
+    {
+        switch (end)
+        {
+            case "r":
+                return "Ramanagara";
+            case "c":
+                return "Channapatna";
+            case "mu":
+                return "Madhur";
+            case "mn":
+                return "Mandya";
+            case "s":
+                return "Srirangapatna";
+            case "my":
+                return "Mysore";
+            default:
+                return "Unknown";
+        }
+    }
+
+    public static void ContinueOrNot()
+    {
+        Scanner key = new Scanner(System.in);
+        System.out.println("\n***  THANK YOU  ***");
+        System.out.println("Would u like to continue then      click 'y' ");
+        System.out.println("or if u like to exit or terminate  click 'n'");
+        char choose = key.next().charAt(0);
+        char choice = Character.toLowerCase(choose);
+        if (choice == 'y')
+        {
+            gender();
+        }
+        else if (choice == 'n')
+        {
+            System.exit(0);
+        }
+        else
+        {
+            System.out.println("invalid Choice");
+            System.out.println("Pls enter correct choice");
+            ContinueOrNot();
+        }
+    }
+}
